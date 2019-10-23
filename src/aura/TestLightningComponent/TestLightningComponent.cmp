@@ -1,0 +1,12 @@
+<aura:component>
+	<aura:attribute name="testString" type="String" default="Tst"/>
+
+	<div class="slds-grid slds-wrap">
+		<div class="slds-col slds-size__1-of-2">
+			<lightning:input label="Test" value="{!v.testString}"/>
+		</div>
+		<div class="slds-col slds-size__1-of-2">
+			<lightning:input label="Test2" value=""/>
+		</div>
+	</div>
+</aura:component>
