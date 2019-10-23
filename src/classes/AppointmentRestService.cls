@@ -17,6 +17,7 @@ global with sharing class AppointmentRestService {
 
         try {
             newAppointment = setupAppointment(data);
+            System.debug(newAppointment);
             insert newAppointment;
 
             if (newAppointment != null) {
@@ -28,7 +29,7 @@ global with sharing class AppointmentRestService {
                 RestContext.response.responseBody = Blob.valueOf(JSON.serialize(responseBody));
             }
         } catch (Exception ex) {
-            RestContext.response.responseBody = Blob.valueOf(ex.getMessage());
+            RestContext.response.responseBody = Blob.valueOf(ex.getMessage() + ' ' + ex.getLineNumber());
             RestContext.response.statusCode = 500;
         }
     }
@@ -41,8 +42,8 @@ global with sharing class AppointmentRestService {
             Time startTime = getTimeFromString((String) data.get(Constants.REST_START_TIME_KEY));
             Time endTime = getTimeFromString((String) data.get(Constants.REST_END_TIME_KEY));
             String accountName = (String) data.get(Constants.REST_ACCOUNT_NAME_KEY);
-            Appointment__c appointment = new Appointment__c();
 
+            Appointment__c appointment = new Appointment__c();
             appointment.Client_First_Name__c = firstName;
             appointment.Client_Last_Name__c = secondName;
             appointment.Appointment_Date__c = appointmentDate;
